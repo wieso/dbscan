@@ -39,7 +39,7 @@ def region_query(P, eps, D):
     return neighbour_pts
 
 
-def dbscan(X, eps, min_pts):
+def dbscan(X, eps, min_pts, **kwargs):
     matrix = np.matrix(X)
     target = np.full((X.shape[0], 1), -1)
     data = np.concatenate((matrix, target), axis=1)
@@ -72,6 +72,8 @@ def dbscan(X, eps, min_pts):
     g = sns.FacetGrid(data1, hue=2, palette="Set1", size=5)
     g.map(plt.scatter, 0, 1, s=100, linewidth=.5, edgecolor="white")
     g.add_legend()
+    if 'name' in kwargs:
+        plt.title(kwargs['name'])
     plt.show()
 
 
