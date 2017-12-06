@@ -84,82 +84,87 @@ if __name__ == '__main__':
 
     models = [
         {
+            'name': 'Far Blobs',
             'X': datasets.make_blobs(n_samples=n_samples, random_state=8, center_box=(-2000, 2000), cluster_std=50)[0],
             'eps': 100,
             'min_pts': 10,
         },
         {
+            'name': 'Noisy Circles',
             'X': datasets.make_circles(n_samples=n_samples, factor=.5, noise=.05)[0],
             'eps': 0.2,
             'min_pts': 6,
         },
         {
+            'name': 'Noisy Moons',
             'X': datasets.make_moons(n_samples=n_samples, noise=.05)[0],
             'eps': 0.2,
             'min_pts': 6,
         },
         {
+            'name': 'Blobs',
             'X': datasets.make_blobs(n_samples=n_samples, random_state=8)[0],
             'eps': 0.5,
             'min_pts': 15,
         },
         {
+            'name': 'No structure',
             'X': np.random.rand(n_samples, 2),
             'eps': 0.3,
             'min_pts': 6,
         },
         {
-            # Anisotropicly distributed data
+            'name': 'Anisotropicly distributed data',
             'X': np.dot(datasets.make_blobs(n_samples=n_samples, random_state=random_state)[0], transformation),
             'eps': 0.4,
             'min_pts': 6,
         },
         {
-            # blobs with varied variances
+            'name': 'Blobs with varied variances',
             'X': datasets.make_blobs(n_samples=n_samples,
                                      cluster_std=[1.0, 2.5, 0.5],
                                      random_state=random_state)[0],
-            'eps': 0.3,
-            'min_pts': 12,
+            'eps': 0.9,
+            'min_pts': 5,
         },
         {
+            'name': '2 features, 5 centers',
             'X': datasets.make_blobs(n_samples=n_samples, n_features=2, centers=5)[0],
-            'eps': 0.9,
-            'min_pts': 15,
+            'eps': 0.6,
+            'min_pts': 5,
         },
         {
+            'name': 'Gaussian quantiles',
             'X': datasets.make_gaussian_quantiles(n_samples=n_samples, n_features=2, n_classes=6)[0],
-            'eps': 0.9,
-            'min_pts': 8,
+            'eps': 0.15,
+            'min_pts': 3,
         },
         {
+            'name': 'Circles',
             'X': datasets.make_circles(n_samples=n_samples, factor=0.5)[0],
             'eps': 0.25,
             'min_pts': 5,
         },
         {
+            'name': '2 features, 1 informative, 1 cluster',
             'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=1,
                                               n_clusters_per_class=1)[0],
-            'eps': 0.3,
-            'min_pts': 8,
-        },
-        {
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2,
-                                              n_clusters_per_class=1)[0],
-            'eps': 0.3,
-            'min_pts': 12,
-        },
-        {
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2)[0],
-            'eps': 0.5,
-            'min_pts': 8,
-        },
-        {
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2,
-                                              n_clusters_per_class=1, n_classes=3)[0],
-            'eps': 0.1,
+            'eps': 0.2,
             'min_pts': 6,
         },
+        {
+            'name': '2 features, 2 informative, 1 cluster',
+            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2,
+                                              n_clusters_per_class=1)[0],
+            'eps': 0.2,
+            'min_pts': 7,
+        },
+        {
+            'name': '2 features, 2 informative',
+            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2)[0],
+            'eps': 0.25,
+            'min_pts': 6,
+        }
     ]
 
     with concurrent.futures.ProcessPoolExecutor() as e:
