@@ -27,8 +27,6 @@ import seaborn as sns
 from matplotlib import pyplot as plt
 from sklearn import datasets
 
-import concurrent.futures
-
 
 def region_query(P, eps, D):
     neighbour_pts = {}
@@ -133,40 +131,39 @@ if __name__ == '__main__':
             'eps': 0.6,
             'min_pts': 5,
         },
-        {
-            'name': 'Gaussian quantiles',
-            'X': datasets.make_gaussian_quantiles(n_samples=n_samples, n_features=2, n_classes=6)[0],
-            'eps': 0.15,
-            'min_pts': 3,
-        },
+        # {
+        #     'name': 'Gaussian quantiles',
+        #     'X': datasets.make_gaussian_quantiles(n_samples=n_samples, n_features=2, n_classes=6)[0],
+        #     'eps': 0.15,
+        #     'min_pts': 3,
+        # },
         {
             'name': 'Circles',
             'X': datasets.make_circles(n_samples=n_samples, factor=0.5)[0],
             'eps': 0.25,
             'min_pts': 5,
         },
-        {
-            'name': '2 features, 1 informative, 1 cluster',
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=1,
-                                              n_clusters_per_class=1)[0],
-            'eps': 0.2,
-            'min_pts': 6,
-        },
-        {
-            'name': '2 features, 2 informative, 1 cluster',
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2,
-                                              n_clusters_per_class=1)[0],
-            'eps': 0.2,
-            'min_pts': 7,
-        },
-        {
-            'name': '2 features, 2 informative',
-            'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2)[0],
-            'eps': 0.25,
-            'min_pts': 6,
-        }
+        # {
+        #     'name': '2 features, 1 informative, 1 cluster',
+        #     'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=1,
+        #                                       n_clusters_per_class=1)[0],
+        #     'eps': 0.2,
+        #     'min_pts': 6,
+        # },
+        # {
+        #     'name': '2 features, 2 informative, 1 cluster',
+        #     'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2,
+        #                                       n_clusters_per_class=1)[0],
+        #     'eps': 0.2,
+        #     'min_pts': 7,
+        # },
+        # {
+        #     'name': '2 features, 2 informative',
+        #     'X': datasets.make_classification(n_samples=n_samples, n_features=2, n_redundant=0, n_informative=2)[0],
+        #     'eps': 0.25,
+        #     'min_pts': 6,
+        # }
     ]
 
-    with concurrent.futures.ProcessPoolExecutor() as e:
-        for m in models:
-            e.submit(dbscan, **m)
+    for m in models:
+        dbscan(**m)
