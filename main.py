@@ -75,7 +75,8 @@ def dbscan(X, eps, min_pts, **kwargs):
     plt.show()
 
 
-if __name__ == '__main__':
+
+def main():
     n_samples = 500
     random_state = 170
     transformation = [[0.6, -0.6], [-0.4, 0.8]]
@@ -167,3 +168,6 @@ if __name__ == '__main__':
 
     for m in models:
         dbscan(**m)
+
+if __name__ == '__main__':
+    main()
